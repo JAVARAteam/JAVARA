@@ -84,6 +84,8 @@ public class NaverMap implements ActionListener {
 	
 	public void map_service(AddressVO vo) {
 		String URL_STATICMAP = "https://naveropenapi.apigw.ntruss.com/map-static/v2/raster?";
+		ArrayList<employmentInfo> emList = new ArrayList<employmentInfo>();
+		EmploymentDB ed3 = new EmploymentDB();
 		
 		try {
 			String pos = URLEncoder.encode(vo.getX() + " " + vo.getY(), "UTF-8");
@@ -100,32 +102,44 @@ public class NaverMap implements ActionListener {
 			int responseCode = con.getResponseCode();
 			BufferedReader br;
 			
-			// Á¤»óÈ£ÃâÀÎ °æ¿ì.
+			// ì •ìƒí˜¸ì¶œì¸ ê²½ìš°.
 			if (responseCode == 200) {
 				InputStream is = con.getInputStream();
 				
 				int read = 0;
 				byte[] bytes = new byte[1024];
 				
-				// ·£´ı ÆÄÀÏ¸íÀ¸·Î ÆÄÀÏ »ı¼º
+				// ëœë¤ íŒŒì¼ëª…ìœ¼ë¡œ íŒŒì¼ ìƒì„±
 				String tempName = Long.valueOf(new Date().getTime()).toString();
-				File file = new File(tempName + ".jpg");	// ÆÄÀÏ »ı¼º.
+				File file = new File(tempName + ".jpg");	// íŒŒì¼ ìƒì„±.
 				
 				file.createNewFile();
 				
 				OutputStream out = new FileOutputStream(file);
 				
 				while ((read = is.read(bytes)) != -1) {
-					out.write(bytes, 0, read);	// ÆÄÀÏ ÀÛ¼º
+					out.write(bytes, 0, read);	// íŒŒì¼ ì‘ì„±
 				}
 				
 				is.close();
 				ImageIcon img = new ImageIcon(file.getName());
 				naverMap.imageLabel.setIcon(img);
-				naverMap.resAddress.setText(vo.getRoadAddress());
-				naverMap.jibunAddress.setText(vo.getJibunAddress());
-				naverMap.resX.setText(vo.getX());
-				naverMap.resY.setText(vo.getY());
+				StringTokenizer st = new StringTokenizer(vo.toString());
+				em.setpage(st.nextToken());
+				emList.add(em);
+				for (int k = 0; k < emList.size(); k++) {
+					employmentInfo tmp = emList.get(k);
+					String str2 = tmp.getpage();
+					if (str2.equals("ì¶©ì²­ë¶ë„")) {
+						ed3.selectChungbuk();
+						naverMap.resAddress.setText("Company name : ì£¼ì‹íšŒì‚¬ ì”¨ë¹„ì—”ìœ ìŠ¤íƒ€");
+						naverMap.jibunAddress.setText("Company Address : ì¶©ì²­ë¶ë„ ì²­ì£¼ì‹œ ì„œì›êµ¬ ì¶©ëŒ€ë¡œ 1 N10ë™ 803í˜¸ (ê°œì‹ ë™, ì¶©ë¶ëŒ€í•™êµëŒ€í•™ë³¸ë¶€)");
+						naverMap.resX.setText("Recruitment period : 2022-09-06~2022-09-19");
+						naverMap.resY.setText("pay : 9,160 won");
+						naverMap.la1.setText("the agency in charge : ì¶©ë¶ì§€ì‚¬");
+						naverMap.la2.setText("Phone number : 1588-1519");
+					}
+				}
 				
 			} else {
 				System.out.println(responseCode);
