@@ -15,42 +15,60 @@ public class Naver_Map {
 	JTextField address;
 	JLabel resAddress, resX, resY, jibunAddress;
 	JLabel imageLabel;
-	private final String[] labels= {"È¸»ç¸í","ÁÖ¼Ò","¸ğÁı±â°£","±Ù¹«ÇüÅÂ","ÀÓ±İ","ÀüÈ­¹øÈ£"};
+	private final String[] labels= {"íšŒì‚¬ëª…","ì£¼ì†Œ","ëª¨ì§‘ê¸°ê°„","ê·¼ë¬´í˜•íƒœ","ì„ê¸ˆ","ì „í™”ë²ˆí˜¸"};
 	
 	public void initGUI() {
-		JFrame frm = new JFrame("Map View"); // ÇÁ·¹ÀÓ »ı¼º
-		frm.setPreferredSize(new Dimension(560, 900)); //ÇÁ·¹ÀÓ Å©±â Á¶Á¤
-		frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ÇÁ·¹ÀÓÀÇ X Å¬¸¯ ½Ã Á¾·á.
-		Container c = frm.getContentPane(); // JFrame ¾ÈÂÊ ¿µ¿ª.
+		JFrame frm = new JFrame("Map View"); // í”„ë ˆì„ ìƒì„±
+		frm.setPreferredSize(new Dimension(560, 900)); //í”„ë ˆì„ í¬ê¸° ì¡°ì •
+		frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // í”„ë ˆì„ì˜ X í´ë¦­ ì‹œ ì¢…ë£Œ.
+		Container c = frm.getContentPane(); // JFrame ì•ˆìª½ ì˜ì—­.
 
-		imageLabel = new JLabel("Áöµµº¸±â"); // JFrame ¾ÈÂÊ ¿µ¿ª »ó´Ü¿¡ µé¾î°¥ Áöµµº¸±â
+		imageLabel = new JLabel("ì§€ë„ë³´ê¸°"); // JFrame ì•ˆìª½ ì˜ì—­ ìƒë‹¨ì— ë“¤ì–´ê°ˆ ì§€ë„ë³´ê¸°
 		JPanel pan = new JPanel();
-		JLabel addressLbl = new JLabel("ÁÖ¼ÒÀÔ·Â"); // JFrame ¾ÈÂÊ ¿µ¿ª »ó´Ü¿¡ µé¾î°¥ ÁÖ¼ÒÀÔ·Â
+		JLabel addressLbl = new JLabel("ì£¼ì†Œì…ë ¥"); // JFrame ì•ˆìª½ ì˜ì—­ ìƒë‹¨ì— ë“¤ì–´ê°ˆ ì£¼ì†Œì…ë ¥
 		address = new JTextField(30);
-		JButton btn = new JButton("Å¬¸¯"); // JFrame ¾ÈÂÊ ¿µ¿ª¿¡ µé¾î°¥ Å¬¸¯ ¹öÆ°
+		JButton btn = new JButton("í´ë¦­"); // JFrame ì•ˆìª½ ì˜ì—­ì— ë“¤ì–´ê°ˆ í´ë¦­ ë²„íŠ¼
 	
 
 		pan.add(addressLbl);
 		pan.add(address);
 		pan.add(btn);
-		btn.addActionListener(new NaverMap(this)); // pan¿¡ »ı¼ºÇÑ ¹öÆ°(btn) Å¬¸¯ ½Ã Ã³¸®ÇÏ´Â ÀÌº¥Æ® ÇÚµé·¯.
+		btn.addActionListener(new NaverMap(this)); // panì— ìƒì„±í•œ ë²„íŠ¼(btn) í´ë¦­ ì‹œ ì²˜ë¦¬í•˜ëŠ” ì´ë²¤íŠ¸ í•¸ë“¤ëŸ¬.
 
 		JPanel pan1 = new JPanel();
-		pan1.setLayout(new GridLayout(4, 1)); // Áöµµ ÇÏ´Ü ±×¸®µå 4Çà 1¿­·Î »ı¼º.
-		resAddress = new JLabel("µµ·Î¸í"); // ±×¸®µå 1Çà¿¡ µé¾î°¥ µµ·Î¸í
-		jibunAddress = new JLabel("Áö¹øÁÖ¼Ò"); // ±×¸®µå 2Çà¿¡ µé¾î°¥ Áö¹øÁÖ¼Ò
-		resX = new JLabel("°æµµ"); // ±×¸®µå 3Çà¿¡ µé¾î°¥ °æµµ
-		resY = new JLabel("À§µµ"); // ±×¸®µå 4Çà¿¡ µé¾î°¥ À§µµ
+		pan1.setLayout(new GridLayout(12, 1));
+		resAddress = new JLabel("Company name"); // ê·¸ë¦¬ë“œ 1í–‰ì— ë“¤ì–´ê°ˆ ë„ë¡œëª…
+		jibunAddress = new JLabel("Company Address"); // ê·¸ë¦¬ë“œ 2í–‰ì— ë“¤ì–´ê°ˆ ì§€ë²ˆì£¼ì†Œ
+		resX = new JLabel("Recruitment period"); // ê·¸ë¦¬ë“œ 3í–‰ì— ë“¤ì–´ê°ˆ ê²½ë„
+		resY = new JLabel("pay");
+		la1 = new JLabel("the agency in charge");
+		la2= new JLabel("Phone number");
+		resAddress.setFont(new Font("NanumSquare", Font.PLAIN, 15));
+		jibunAddress.setFont(new Font("NanumSquare", Font.PLAIN, 15));
+		resX.setFont(new Font("NanumSquare", Font.PLAIN, 15));
+		resY.setFont(new Font("NanumSquare", Font.PLAIN, 15));
+		la1.setFont(new Font("NanumSquare", Font.PLAIN, 15));
+		la2.setFont(new Font("NanumSquare", Font.PLAIN, 15));
+		
+		pan1.setBackground(Color.WHITE);
+		// ê·¸ë¦¬ë“œ 4í–‰ì— ë“¤ì–´ê°ˆ ìœ„ë„
 		pan1.add(resAddress);
 		pan1.add(jibunAddress);
 		pan1.add(resX);
 		pan1.add(resY);
+		pan1.add(la1);
+		pan1.add(la2);
+		
+		//btn1.setBounds(30, 170, )
+		pan1.add(btn1);
+		pan1.add(btn2);
+		//pan1.add(scroll);
 
-		c.add(BorderLayout.NORTH, pan); // »ó´Ü pan ¼¼ÆÃ
-		c.add(BorderLayout.CENTER, imageLabel); // ¼¾ÅÍ imageLabel ¼¼ÆÃ
-		c.add(BorderLayout.SOUTH, pan1); // ÇÏ´Ü pan1 ¼¼ÆÃ
+		c.add(BorderLayout.NORTH, pan); // ìƒë‹¨ pan ì„¸íŒ…
+		c.add(BorderLayout.CENTER, imageLabel); // ì„¼í„° imageLabel ì„¸íŒ…
+		c.add(BorderLayout.SOUTH, pan1); // í•˜ë‹¨ pan1 ì„¸íŒ…
 
-		frm.setSize(500,390);
+		frm.setSize(500, 650);
 		frm.setVisible(true);
 
 	}
